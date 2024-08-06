@@ -1,14 +1,32 @@
+import express from 'express'; 
+import cors from 'cors';
+// import cookieParser from 'cookie-parser';
+// import userAuthRouter from './routes/userauth.router.js';
 import dotenv from 'dotenv';
-import connectDB from './db/index.js';
-import app from './app.js';
+import { dbclient } from './db/index.js';
 
 dotenv.config();
 
-connectDB().then(() => {
-  app.listen(process.env.PORT || 8000, () => {
-    console.log(`Server is running on port: ${process.env.PORT || 8000}`);
-  });
-}).catch((error) => {
-  console.log(`Error connecting to the database: ${error}`);
-  process.exit(1);
-});
+const app = express();
+
+app.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true
+}));   
+
+
+app.use(express.json({limit: '20kb'}));
+app.use(express.urlencoded({extended: true , limit: '16kb'}));
+app.use(express.static('public'));
+// app.use(cookieParser());
+
+
+
+console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN);
+
+// app.use('/api/v1/users', userAuthRouter);
+
+
+
+
+export default app;
