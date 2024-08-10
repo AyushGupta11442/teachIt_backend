@@ -1,7 +1,7 @@
 import express from 'express'; 
 import cors from 'cors';
 // import cookieParser from 'cookie-parser';
-import userAuthRouter from './routes/';
+// import userAuthRouter from './routes';
 import dotenv from 'dotenv';
 import { dbclient } from './db/index.js';
 
@@ -24,7 +24,7 @@ app.use(express.static('public'));
 
 console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN);
 
-app.use('/api/v1/users', userAuthRouter);
+// app.use('/api/v1/users', userAuthRouter);
 
 
 
